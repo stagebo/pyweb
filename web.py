@@ -38,7 +38,7 @@ class Application(pyrestful.rest.RestService):
     def __init__(self):
         self.cf = configparser.ConfigParser()
         self.read_config()
-        # 内存数据库
+        # 内存数据库 t
         self.redis = redisdb.RedisDb()
 
         logging.info("tornado is tring to init...")
