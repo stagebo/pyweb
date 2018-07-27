@@ -33,3 +33,17 @@ CREATE TABLE t_statistics
     f_lip int,
     f_lpv int
 );
+DROP TABLE IF EXIXTS t_game_image;
+CREATE TABLE t_game_image (
+	id INT PRIMARY KEY auto_increment,
+	f_url nvarchar (128),
+	f_url1 nvarchar (128),
+	f_url2 nvarchar (128),
+	f_url3 nvarchar (128),
+	f_url4 nvarchar (128),
+	f_url5 nvarchar (128),
+	f_url6 nvarchar (128),
+	f_url7 nvarchar (128),
+	f_url8 nvarchar (128),
+	f_url9 nvarchar (128)
+)

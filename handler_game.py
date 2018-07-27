@@ -53,6 +53,11 @@ class PuzzleHandler(pyrestful.rest.RestHandler):
 
     @tornado.web.asynchronous
     @tornado.gen.engine
+    @get(_path="/game/test")
+    def game_test(self):
+        self.finish("game test")
+    @tornado.web.asynchronous
+    @tornado.gen.engine
     @get(_path="/game/create_image")
     def create_image(self):
         '''
