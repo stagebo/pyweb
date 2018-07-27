@@ -31,12 +31,13 @@ from tornado import ioloop, gen
 from tornado_mysql import pools
 
 
-def log(*msg, sp=' ',end='\n'):
+def log(*msg, sp=' ',end=''):
     st = ""
     for m in msg:
         st += str(m)+sp
     st += end
     logging.info(st)
+    print(st)
 
 
 class Application(pyrestful.rest.RestService):
