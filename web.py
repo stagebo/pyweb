@@ -182,19 +182,6 @@ def copy_log():
                         datefmt='%a, %d %b %Y %H:%M:%S',
                         filename=logfile,
                         filemode='w')
-def kill_pyweb():
-    lines = os.popen('ps -ef')
-    for line in lines:
-        if line.find("python3") == -1 and line.find("java") == -1:
-            continue
-        vars = line.split()
-        pid = vars[1]  # get pid
-        proc = ' '.join(vars[7:])  # get proc description
-        if "web.py" in proc and "python" in proc:
-            log("kill %s is starting"%pid)
-            os.system("kill %s"%pid)
-        elif "tale" in proc and "java" in proc:
-            log(proc, pid)
 
 def main():
     '''
@@ -213,6 +200,5 @@ def main():
         log("\nStop the service")
 
 if __name__ == '__main__':
-    kill_pyweb()
     log("service trying to start...")
     main()
