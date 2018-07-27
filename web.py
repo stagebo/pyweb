@@ -37,6 +37,7 @@ def log(*msg, sp=' ',end=''):
         st += str(m)+sp
     st += end
     logging.info(st)
+    print(st)
 
 
 
