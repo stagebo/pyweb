@@ -20,6 +20,7 @@ import sys
 class ForuHandler(pyrestful.rest.RestHandler):
     @get(_path="/foru")
     def get_index(self):
+        gl.log("foru")
         self.render("foru/index.html")
 
     @get(_path="/foru/loveyqy")

@@ -42,3 +42,11 @@ def get_err_params(title="错误",msg="发生了错误！",href="",href_text="�
     }
 
     return err
+import logging
+def log(*msg, sp=' ',end=''):
+    st = ""
+    for m in msg:
+        st += str(m)+sp
+    st += end
+    logging.info(st)
+    print(st)

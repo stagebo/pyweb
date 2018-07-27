@@ -81,7 +81,7 @@ class AdminHandler(pyrestful.rest.RestHandler):
                 on DUPLICATE key update 
                 f_time=values(f_time),f_ip=values(f_ip),f_pv=values(f_pv),f_lip=values(f_lip),f_lpv=values(f_lpv);
                 ''' % (time, ip, pv, lip, lpv)
-            # print(sql)
+            gl.log(sql)
             ret = self.application.db.execute_sql(sql)
         except Exception as e:
             logging.warning("浏览统计存在问题！")
@@ -114,7 +114,7 @@ class AdminHandler(pyrestful.rest.RestHandler):
     def post_login(self):
         user = self.get_body_argument("username",None)
         pwd = self.get_body_argument("password",None)
-        print(user,pwd)
+        gl.log(user,pwd)
         if user == 'admin' and pwd == 'admin':  # 判断用户的密码和账号
             obj = hashlib.md5()  # 创建md5加密对象
             obj.update(bytes(str(time.time()), encoding="utf-8"))  # 获取系统当前时间，传入到md5加密对象里加密

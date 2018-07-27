@@ -81,10 +81,10 @@ class PuzzleHandler(pyrestful.rest.RestHandler):
             value_list.append("'" + filename + "'")
             j = key//3
             i = key%3
-            print(i,j)
+            gl.log(i,j)
             region = im.crop((i * d, j * d, i * d + d, j * d + d))
             region.save(filename)
-        print(a, d)
+        gl.log(a, d)
         sql = """
            insert into t_game_image (f_url,f_url1,f_url2,f_url3,f_url4,f_url5,f_url6,f_url7,f_url8,f_url9)
            values (%s)
