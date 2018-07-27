@@ -37,7 +37,7 @@ def log(*msg, sp=' ',end=''):
         st += str(m)+sp
     st += end
     logging.info(st)
-    print(st)
+
 
 
 class Application(pyrestful.rest.RestService):
@@ -190,8 +190,9 @@ def main():
     '''
     copy_log()
     try:
-        log("Start the service")
+        log("Start the service" )
         app = Application()
+        log("try to bind port:%s" % app.web_port)
         app.listen(app.web_port)
         log("access port %s" % app.web_port)
         tornado.ioloop.IOLoop.instance().start()
