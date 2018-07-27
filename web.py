@@ -31,7 +31,8 @@ from tornado import ioloop, gen
 from tornado_mysql import pools
 
 
-
+def log(msg):
+    logging.info(msg)
 
 
 class Application(pyrestful.rest.RestService):
@@ -84,7 +85,7 @@ class Application(pyrestful.rest.RestService):
         self.mysql_db = self.cf.get("mysql", "db")
         self.mysql_port = self.cf.getint("mysql", "port")
         self.web_port = self.cf.getint("web", "port")
-        print(self.mysql_host,self.mysql_uid,self.mysql_port,self.mysql_pwd,self.mysql_db)
+        log(self.mysql_host,self.mysql_uid,self.mysql_port,self.mysql_pwd,self.mysql_db)
 
     def mylog(self,handler):
         if handler.get_status() < 400:
@@ -92,11 +93,11 @@ class Application(pyrestful.rest.RestService):
         elif handler.get_status() < 500:
             log_method = access_log.warning
         else:
-            print('服务器异常！')
+            log('server get an error！')
             log_method = access_log.error
 
         request_time = 1000.0 * handler.request.request_time()
-        print("%d %s %.2fms"%(handler.get_status(), handler._request_summary(), request_time))
+        log("%d %s %.2fms"%(handler.get_status(), handler._request_summary(), request_time))
         log_method("%d %s %.2fms", handler.get_status(),handler._request_summary(), request_time)
 
 #
@@ -153,11 +154,11 @@ def copy_log():
     logfile =os.path.join(logpath,"pyweb.log") # "..\log\pyweb.log"
     logbak = os.path.join(logpath,"%s.log"%datetime.datetime.now().strftime("%Y%m%d%H%M%S"))
     cmd = ""
-    print("init log file.")
-    print("platform info:%s" % platform.platform())
-    print( os.path.exists(logfile))
+    log("init log file.")
+    log("platform info:%s" % platform.platform())
+    log( os.path.exists(logfile))
     if not os.path.exists(logfile):
-        print("create log files.")
+        log("create log files.")
         os.makedirs(logpath)
         open(logfile, "w")
     elif "Windows" in platform.platform():
@@ -169,8 +170,8 @@ def copy_log():
         cmd = "cp %s %s" % (logfile,logbak)
     if cmd != "":
         p = os.popen(cmd)
-        print(cmd)
-        print(p)
+        log(cmd)
+        log(p)
     logging.basicConfig(level=logging.DEBUG,
                         format='%(asctime)s %(filename)s[line:%(lineno)d] %(levelname)s %(message)s',
                         datefmt='%a, %d %b %Y %H:%M:%S',
@@ -184,13 +185,14 @@ def main():
     '''
     copy_log()
     try:
-        print("Start the service")
+        log("Start the service")
         app = Application()
         app.listen(app.web_port)
-        print("access port %s" % app.web_port)
+        log("access port %s" % app.web_port)
         tornado.ioloop.IOLoop.instance().start()
     except KeyboardInterrupt:
-        print("\nStop the service")
+        log("\nStop the service")
 
 if __name__ == '__main__':
+    log("service trying to start...")
     main()
