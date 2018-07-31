@@ -103,8 +103,9 @@ class Application(pyrestful.rest.RestService):
             log_method = access_log.error
 
         request_time = 1000.0 * handler.request.request_time()
-        log("%d %s %.2fms"%(handler.get_status(), handler._request_summary(), request_time))
-        log_method("%d %s %.2fms", handler.get_status(),handler._request_summary(), request_time)
+        now = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        log("%s: %d %s %.2fms"%(now ,handler.get_status(), handler._request_summary(), request_time))
+        log_method("%s: %d %s %.2fms",now, handler.get_status(),handler._request_summary(), request_time)
 
 #
 class MainHadler(pyrestful.rest.RestHandler):
