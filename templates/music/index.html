@@ -1,0 +1,36 @@
+<script src="../static/plugins/jquery/jquery-1.12.2.js"></script>
+<div>
+    <input type="text" id="music_name"/>
+    <input type="button" onclick="get_music_list()" value="搜索"/>
+
+</div>
+<br>
+<h2>搜索列表</h2>
+ <div><span>歌名</span><span>歌手</span><span>链接</span></div>
+<div id="song_list">
+    <li>
+        <ul><div><span>歌名</span><span>歌手</span><span>链接</span></div></ul>
+    </li>
+</div>
+<script>
+    function get_music_list(){
+        var name = $("#music_name").val();
+        $.get("/music/list?name"+name,function (mlist) {
+            console.log(mlist);
+            // var songlist = mlist['data']['song']['list'];
+            $("#song_list").empty();
+            for(var i =0;i<mlist.length;i++){
+                var song = mlist[i];
+                var name = song['songname'];
+                var singer = song['singer'];
+                var link = song['link'];
+                var htl = "<ul><div><span>"+name+"</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>"+singer+
+                    "</span>&nbsp;&nbsp;&nbsp;&nbsp;<span><a target='_blank' href='"+link+
+                    "'>下载</a></span></div></ul>";
+                $("#song_list").append(htl);
+            }
+
+        })
+    }
+
+</script>
