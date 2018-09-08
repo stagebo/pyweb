@@ -6,7 +6,7 @@
 </div>
 <br>
 <h2>搜索列表</h2>
- <div><span>歌名</span><span>歌手</span><span>链接</span></div>
+
 <div id="song_list">
     <li>
         <ul><div><span>歌名</span><span>歌手</span><span>链接</span></div></ul>
@@ -19,6 +19,9 @@
             console.log(mlist);
             // var songlist = mlist['data']['song']['list'];
             $("#song_list").empty();
+             var htl = "<ul><div><span>歌名</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>歌手"+
+                    "</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>下载</span></div></ul>";
+                $("#song_list").append(htl);
             for(var i =0;i<mlist.length;i++){
                 var song = mlist[i];
                 var name = song['songname'];
