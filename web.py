@@ -20,6 +20,7 @@ from handler_foru import ForuHandler
 from handler_message import  MessageHandler
 from handler_game import PuzzleHandler
 from handler_jsonp import JsonpHandler
+from handler_music import MusicHandler
 from tornado.log import access_log, app_log, gen_log
 from tornado.options import define,options
 sys.path.append("..")
@@ -70,6 +71,7 @@ class Application(pyrestful.rest.RestService):
             MessageHandler,
             PuzzleHandler,
             JsonpHandler,
+            MusicHandler
         ]
         super(Application, self).__init__(handlers, **settings)
         # TODO 取消原始数据库连接工具
@@ -198,6 +200,7 @@ def main():
         app.listen(app.web_port)
         log("access port %s" % app.web_port)
         tornado.ioloop.IOLoop.instance().start()
+        log("http://localhost:%s"%app.web_port)
     except KeyboardInterrupt:
         log("\nStop the service")
 

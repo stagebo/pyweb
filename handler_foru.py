@@ -29,8 +29,10 @@ class ForuHandler(pyrestful.rest.RestHandler):
 
     @get(_path="/foru/lineforu",_produces=mediatypes.APPLICATION_JSON)
     def get_days(self):
-        tar = datetime.datetime(2017,6,6,21,0,0)
+        tar = datetime.datetime(2017, 6, 6, 21, 0, 0)
+        brake = datetime.datetime(2018, 9, 2, 21, 7, 0)
         now = datetime.datetime.now()
+        now = brake
         timedel = now - tar
 
         result = {
@@ -44,20 +46,22 @@ class ForuHandler(pyrestful.rest.RestHandler):
     def get_months(self):
         brithday = self.get_argument("bri",None)
         bri = datetime.datetime(1994,3,23,0,0,0)
-        if  bri:
+        if bri:
             try:
                 bri = datetime.datetime.strptime(brithday,"%Y-%m-%d")
             except:
                 pass
         tar = datetime.datetime(2017,6,6,21,0,0)
+        brake = datetime.datetime(2018, 9, 2, 21, 7, 0)
         now = datetime.datetime.now()
 
         m1 = self.month_differ(tar,bri)
-        m2 = self.month_differ(now,tar)
-
+        m2 = self.month_differ(brake,tar)
+        m3 = self.month_differ(now,brake)
         return {
             "n1":m1,
             "n2":m1+m2,
+            "n3":m1+m2+m3,
             "start":str(bri),
             "tar":str(tar),
             "now":str(now)
