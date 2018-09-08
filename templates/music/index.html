@@ -9,7 +9,7 @@
 
 <div id="song_list">
     <li>
-        <ul><div><span>歌名</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>歌手</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>链接</span></div></ul>
+        <ul><div><span>歌名</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>歌手</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>操作</span></div></ul>
     </li>
 </div>
 <script>
@@ -20,7 +20,7 @@
             // var songlist = mlist['data']['song']['list'];
             $("#song_list").empty();
              var htl = "<ul><div><span>歌名</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>歌手"+
-                    "</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>下载</span></div></ul>";
+                    "</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>操作</span></div></ul>";
                 $("#song_list").append(htl);
             for(var i =0;i<mlist.length;i++){
                 var song = mlist[i];
