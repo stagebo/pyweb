@@ -15,7 +15,7 @@
 <script>
     function get_music_list(){
         var name = $("#music_name").val();
-        $.get("/music/list?name"+name,function (mlist) {
+        $.get("/music/list?name="+name,function (mlist) {
             console.log(mlist);
             // var songlist = mlist['data']['song']['list'];
             $("#song_list").empty();
