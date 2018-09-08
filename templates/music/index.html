@@ -1,21 +1,22 @@
 <script src="../static/plugins/jquery/jquery-1.12.2.js"></script>
 <div>
-    <input type="text" id="music_name"/>
+    <input type="text" id="music_name"/>  <input type="text" id="music_count"/>
     <input type="button" onclick="get_music_list()" value="搜索"/>
 
 </div>
 <br>
 <h2>搜索列表</h2>
 
-<div id="song_list">
-    <li>
+<div >
+    <li id="song_list">
         <ul><div><span>歌名</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>歌手</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>操作</span></div></ul>
     </li>
 </div>
 <script>
     function get_music_list(){
         var name = $("#music_name").val();
-        $.get("/music/list?name="+name,function (mlist) {
+        var music_count = $("#music_count").val();
+        $.get("/music/list?name="+name+"&count="+music_count,function (mlist) {
             console.log(mlist);
             // var songlist = mlist['data']['song']['list'];
             $("#song_list").empty();
