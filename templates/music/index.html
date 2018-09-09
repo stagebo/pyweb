@@ -1,40 +1,57 @@
 <script src="../static/plugins/jquery/jquery-1.12.2.js"></script>
 <div>
-    <input type="text" id="music_name"/>  <input type="text" id="music_count"/>
+    关键词：<input type="text" id="music_name"/>&nbsp;&nbsp;&nbsp;&nbsp;
+    数&nbsp;&nbsp;量：<input type="text" value="20" style="width:30px;" id="music_count"/>&nbsp;&nbsp;&nbsp;&nbsp;
     <input type="button" onclick="get_music_list()" value="搜索"/>
 
 </div>
 <br>
 <h2>搜索列表</h2>
-
+<span id="music_msg" style="float:left;"></span>
+<hr>
 <div >
-    <li id="song_list">
+    <ol id="song_list">
         <ul><div><span>歌名</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>歌手</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>操作</span></div></ul>
-    </li>
+    </ol>
 </div>
+<hr>
 <script>
     function get_music_list(){
         var name = $("#music_name").val();
         var music_count = $("#music_count").val();
-        $.get("/music/list?name="+name+"&count="+music_count,function (mlist) {
-            console.log(mlist);
-            // var songlist = mlist['data']['song']['list'];
-            $("#song_list").empty();
-             var htl = "<ul><div><span>歌名</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>歌手"+
+        showMsg("正在搜索，请稍等...");
+        $.ajax({
+            url:"/music/list?name="+name+"&count="+music_count,
+            type:'get',
+            dataType:'json',
+            success:function (mlist) {
+                console.log(mlist);
+                // var songlist = mlist['data']['song']['list'];
+                $("#song_list").empty();
+                var htl = "<ul><div><span>歌名</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>歌手"+
                     "</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>操作</span></div></ul>";
                 $("#song_list").append(htl);
-            for(var i =0;i<mlist.length;i++){
-                var song = mlist[i];
-                var name = song['songname'];
-                var singer = song['singer'];
-                var link = song['link'];
-                var htl = "<ul><div><span>"+name+"</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>"+singer+
-                    "</span>&nbsp;&nbsp;&nbsp;&nbsp;<span><a target='_blank' href='"+link+
-                    "'>下载</a></span></div></ul>";
-                $("#song_list").append(htl);
+                for(var i =0;i<mlist.length;i++){
+                    var song = mlist[i];
+                    var name = song['songname'];
+                    var singer = song['singer'];
+                    var link = song['link'];
+                    var htl = "<li><span>"+name+"</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>"+singer+
+                        "</span>&nbsp;&nbsp;&nbsp;&nbsp;<span><a target='_blank' href='"+link+
+                        "'>下载</a></span></li>";
+                    $("#song_list").append(htl);
+                }
+                showMsg("搜索成功！");
+            },error:function () {
+                showMsg("搜索失败！");
             }
-
-        })
+        });
+        $.get("/music/list?name="+name+"&count="+music_count,1)
     }
-
+    function showMsg(msg){
+        $("#music_msg").html(msg);
+    }
+    function removeMsg(){
+         $("#music_msg").html("");
+    }
 </script>
