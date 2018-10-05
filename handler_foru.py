@@ -60,7 +60,7 @@ class ForuHandler(pyrestful.rest.RestHandler):
         m3 = self.month_differ(now,brake)
         return {
             "n1":m1,
-            "n2":m1+m2,
+            "n2":m1+m2+m3,
             "n3":m1+m2+m3,
             "start":str(bri),
             "tar":str(tar),
