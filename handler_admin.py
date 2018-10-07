@@ -56,6 +56,10 @@ class AdminHandler(pyrestful.rest.RestHandler):
     def get_login(self):
         self.render("admin/login.html",err='')
 
+    @get(_path="/qq/game")
+    def game_qq(self):
+        self.render('game_qq/puzzle.html')
+
     @get(_path="/admin/statistics_number")
     def statistics_visitor(self):
         try:

@@ -1,0 +1,149 @@
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.js"></script>
+<script>
+(function(){
+    if(typeof($) === "undefined"){
+        alert("网页需要jQuery！");
+        return;
+    }
+})()
+</script>
+<style>
+    .split-img-item{
+        width:120px;height:120px;float:left;border:solid 1px;margin-left:0px;margin-top:0px;
+    }
+
+    .img-item{
+        width:100%;height:100%;
+    }
+
+</style>
+<div style="">
+    <div id="puzzle_container" class="col-md-6 col-md-offset-3" style="height:400px;width:400px;">
+       <!-- <div class="split-img-item" idx="1"><h1>7</h1></div>
+        <div class="split-img-item" idx="2"><h1>5</h1></div>
+        <div class="split-img-item" idx="3"><h1>3</h1></div>
+        <div class="split-img-item" idx="4"><h1>4</h1></div>
+        <div class="split-img-item" idx="5"><h1>8</h1></div>
+        <div class="split-img-item" idx="6"><h1>2</h1></div>
+        <div class="split-img-item" idx="7"><h1>1</h1></div>
+        <div class="split-img-item" idx="8"><h1>6</h1></div>-->
+
+    </div>
+
+
+</div>
+<div></div>
+<script>
+    $(function(){
+
+        initGrid();
+
+        $(".split-img-item").click(function(){
+            console.log("click img item.");
+            var idx = $(this).attr("idx")
+            itemClick(idx);
+        });
+
+    });
+
+
+    item_null_idx = 9;
+    function initGrid(){
+        var black = '<div class="split-img-item" idx="9"><div idxx="1" style="background-color:#222;width:120px;height:120px;"></div></div>';
+
+            data = {"ret": 1, "msg": "", "data": [
+                {"total": "static/game_image/image_split_1e03f8ca-916d-11e8-85d7-5254001897cc.png",
+                    "part": [
+                        {"url": "../static/game_image/image_split_1_1e03f8ca-916d-11e8-85d7-5254001897cc_1.png", "idx": 2},
+                        {"url": "static/game_image/image_split_2_1e03f8ca-916d-11e8-85d7-5254001897cc_2.png", "idx": 3}, {"url": "static/game_image/image_split_3_1e03f8ca-916d-11e8-85d7-5254001897cc_3.png", "idx": 4}, {"url": "static/game_image/image_split_8_1e03f8ca-916d-11e8-85d7-5254001897cc_8.png", "idx": 9}, {"url": "static/game_image/image_split_5_1e03f8ca-916d-11e8-85d7-5254001897cc_5.png", "idx": 6}, {"url": "static/game_image/image_split_6_1e03f8ca-916d-11e8-85d7-5254001897cc_6.png", "idx": 7}, {"url": "static/game_image/image_split_7_1e03f8ca-916d-11e8-85d7-5254001897cc_7.png", "idx": 8}, {"url": "static/game_image/image_split_4_1e03f8ca-916d-11e8-85d7-5254001897cc_4.png", "idx": 5}]}, {"total": "static/game_image/image_split_70108d9a-918b-11e8-a27b-5254001897cc.png", "part": [{"url": "static/game_image/image_split_7_70108d9a-918b-11e8-a27b-5254001897cc_7.png", "idx": 8}, {"url": "static/game_image/image_split_3_70108d9a-918b-11e8-a27b-5254001897cc_3.png", "idx": 4}, {"url": "static/game_image/image_split_2_70108d9a-918b-11e8-a27b-5254001897cc_2.png", "idx": 3}, {"url": "static/game_image/image_split_8_70108d9a-918b-11e8-a27b-5254001897cc_8.png", "idx": 9}, {"url": "static/game_image/image_split_1_70108d9a-918b-11e8-a27b-5254001897cc_1.png", "idx": 2}, {"url": "static/game_image/image_split_4_70108d9a-918b-11e8-a27b-5254001897cc_4.png", "idx": 5}, {"url": "static/game_image/image_split_6_70108d9a-918b-11e8-a27b-5254001897cc_6.png", "idx": 7}, {"url": "static/game_image/image_split_5_70108d9a-918b-11e8-a27b-5254001897cc_5.png", "idx": 6}]}, {"total": "static/game_image/image_split_7765dfd2-918b-11e8-a27b-5254001897cc.png", "part": [{"url": "static/game_image/image_split_8_7765dfd2-918b-11e8-a27b-5254001897cc_8.png", "idx": 9}, {"url": "static/game_image/image_split_7_7765dfd2-918b-11e8-a27b-5254001897cc_7.png", "idx": 8}, {"url": "static/game_image/image_split_5_7765dfd2-918b-11e8-a27b-5254001897cc_5.png", "idx": 6}, {"url": "static/game_image/image_split_3_7765dfd2-918b-11e8-a27b-5254001897cc_3.png", "idx": 4}, {"url": "static/game_image/image_split_6_7765dfd2-918b-11e8-a27b-5254001897cc_6.png", "idx": 7}, {"url": "static/game_image/image_split_4_7765dfd2-918b-11e8-a27b-5254001897cc_4.png", "idx": 5}, {"url": "static/game_image/image_split_1_7765dfd2-918b-11e8-a27b-5254001897cc_1.png", "idx": 2},
+                        {"url": "static/game_image/image_split_2_7765dfd2-918b-11e8-a27b-5254001897cc_2.png", "idx": 3}]}]}
+            var hasBlack = 0;
+            var index = 0;
+            var url_list = [
+                {"url":'../static/game_qq/1.png','idx':1},
+                {"url":'../static/game_qq/2.png','idx':2},
+                {"url":'../static/game_qq/3.png','idx':3},
+                {"url":'../static/game_qq/4.png','idx':4},
+                {"url":'../static/game_qq/5.png','idx':5},
+                {"url":'../static/game_qq/6.png','idx':6},
+                {"url":'../static/game_qq/7.png','idx':7},
+                {"url":'../static/game_qq/8.png','idx':8}
+            ]
+            for(var i =0;i<url_list.length+1;i++){
+                if(hasBlack == 0){
+                    if(Math.random()<0.125){
+                        var black = '<div class="split-img-item" idx="'+(i+1)+'"><div idxx="1" style="background-color:#222;width:120px;height:120px;"></div></div>';
+                        $("#puzzle_container").append(black);
+                        item_null_idx = i+1;
+                        hasBlack = 1;
+                        continue;
+                    }
+                }
+                if(i== url_list.length && hasBlack == 0){
+                    var black = '<div class="split-img-item" idx="9"><div idxx="1" style="background-color:#222;width:120px;height:120px;"></div></div>';
+                    $("#puzzle_container").append(black);
+                    hasBlack = 1;
+                    item_null_idx = 9;
+                    break;
+                }
+                var part = url_list[index++];
+                var html_item = '<div class="split-img-item" idx="'+(i+1)
+                +'"><div class="img-item" idxx="'+part["idx"]
+                +'" style="background-image:url(\''+part['url']+'\');background-size:100% 100%;background-repeat:no-repeat;" ></div></div>';
+                $("#puzzle_container").append(html_item);
+            }
+
+            $(".split-img-item").click(function(){
+                var idx = $(this).attr("idx")
+                itemClick(idx);
+            });
+
+    }
+
+    function itemClick(idx){
+        console.log(idx,item_null_idx);
+        idx = parseInt(idx);
+        inidx = parseInt(item_null_idx);
+        if(idx == inidx){
+            return;
+        }
+        if(idx+1==inidx || idx-1==inidx || idx+3==inidx || idx-3==inidx){
+            var item = $("[idx="+idx+"]").html();
+            var aim = $("[idx="+inidx+"]").html();
+            if(aim == "" || item==""){
+                alert("error");
+                return;
+            }
+            console.log("item:",item,idx);
+            console.log("aim：",aim,inidx);
+            $("[idx="+idx+"]").empty();
+            $("[idx="+inidx+"]").empty();
+            $("[idx="+idx+"]").append(aim);
+            $("[idx="+inidx+"]").append(item);
+            item_null_idx = idx;
+            console.log("item_null_idx:",item_null_idx);
+        }
+        var check = checkSuccess();
+        setTimeout(function(){
+            if(check){
+                alert("拼图成功！");
+            }
+        },100);
+    }
+
+    function checkSuccess(){
+        var suc = true;
+        for(var i=1;i<9;i++){
+            var item = $("[idx="+i+"]");
+            var tar = parseInt($(item.html()).attr("idxx"));
+             console.log('check:',i,tar);
+            if(i!=tar){
+                suc = false;
+                break;
+            }
+
+        }
+        console.log("result:",suc);
+        return suc;
+    }
+</script>
