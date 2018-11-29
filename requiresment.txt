@@ -4,3 +4,4 @@ jieba
 chatterbot
 pymysql
 pyrestful
+pillow
